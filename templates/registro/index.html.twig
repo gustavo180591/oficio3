@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulario de Registro{% endblock %}
+
+{% block body %}
+<div class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
+    <div class="card shadow-lg w-100" style="max-width: 500px;">
+        <div class="card-body p-4">
+            <h2 class="text-center mb-4">Formulario de Registro</h2>
+
+            {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+            <div class="mb-3">
+                {{ form_label(form.name, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese su nombre'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.name) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.email, 'Correo Electrónico', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese su correo'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.date, 'Fecha de Nacimiento', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.date) }}
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
