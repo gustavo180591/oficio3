@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comentario{% endblock %}
+
+{% block body %}
+<div class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
+    <div class="card shadow-lg w-100" style="max-width: 500px;">
+        <div class="card-body p-4">
+            <h2 class="text-center mb-4">Comentario</h2>
+
+            {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+            <div class="mb-3">
+                {{ form_label(form.name, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Nombre'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.name) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+    <label for="calification" class="form-label">Calificación</label>
+    <div class="d-flex flex-row">
+        {% for i in 1..5 %}
+            <div class="form-check me-2">
+                <input class="form-check-input" type="radio" id="calification{{ i }}" name="calification" value="{{ i }}" {% if i == form.calification.vars.value %}checked{% endif %} />
+                <label class="form-check-label" for="calification{{ i }}">
+                    {{ i }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="invalid-feedback">
+        {{ form_errors(form.calification) }}
+    </div>
+</div>
+
+
+
+            <div class="mb-3">
+    {{ form_label(form.comment, 'Comentario', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese su comentario', 'rows': 5, 'maxlength': 250}}) }}
+    <div class="invalid-feedback">
+        {{ form_errors(form.comment) }}
+    </div>
+</div>
+                        <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
