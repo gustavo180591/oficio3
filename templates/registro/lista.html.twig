@@ -3,36 +3,83 @@
 {% block title %}Lista de Registros{% endblock %}
 
 {% block body %}
+<div class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
+    <div class="card shadow-lg w-100" style="max-width: 500px;">
+        <div class="card-body p-4">
+            <h2 class="text-center mb-4">Formulario de Búsqueda</h2>
+
+            {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+            <div class="mb-3">
+                {{ form_label(form.oficio, 'Oficio', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Oficio'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.oficio) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.delegacion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Delegación'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.delegacion) }}
+                </div>
+            </div>      
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Lista de Registros</h2>
 
-    <!-- Tabla de Registros -->
-    <table class="table table-bordered table-hover table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Fecha de Registro</th>
-                <!-- Agrega más columnas según tus campos -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for registro in lista %}
-                <tr>
-                    <td>{{ registro.id }}</td>
-                    <td>{{ registro.nombre }}</td>
-                    <td>{{ registro.email }}</td>
-                    <td>{{ registro.fecha|date('d/m/Y') }}</td>
-                    <!-- Agrega más celdas según tus campos -->
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4" class="text-center">No hay registros disponibles</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        {% for registro in lista %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ registro.name }}</h5>
+                        <p class="card-text">
+                            Email: {{ registro.email }}
+                        </p>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ registro.id }}">
+                            Ver más
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-{{ registro.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ registro.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel-{{ registro.id }}">Detalles de {{ registro.name }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>ID:</strong> {{ registro.id }}</p>
+                                <p><strong>Nombre:</strong> {{ registro.name }}</p>
+                                <p><strong>Email:</strong> {{ registro.email }}</p>
+                                <p><strong>Fecha de Registro:</strong> {{ registro.date|date('d/m/Y') }}</p>
+                                <!-- Agrega más campos según sea necesario -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">No hay registros disponibles</div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
-

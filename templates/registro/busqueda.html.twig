@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulario de Busqueda{% endblock %}
+
+{% block body %}
+<div class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
+    <div class="card shadow-lg w-100" style="max-width: 500px;">
+        <div class="card-body p-4">
+            <h2 class="text-center mb-4">Formulario de Busqueda</h2>
+
+            {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
+            <div class="mb-3">
+                {{ form_label(form.oficio, 'Oficio', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese Oficio'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.oficio) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.delegacion, 'Delegacion', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.delegacion, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese su correo'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.delegacion) }}
+                </div>
+            </div>      
+                        <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
