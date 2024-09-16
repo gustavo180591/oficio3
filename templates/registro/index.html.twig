@@ -129,19 +129,19 @@
                 </div>
             </div>
               <div class="mb-3">
-                {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
-                <div class="form-check">
-                {% for delegacion in form.delegacion %}
-                    <div class="form-check form-check-inline">
-                        {{ form_widget(delegacion, {'attr': {'class': 'form-check-input'}}) }}
-                        {{ form_label(delegacion, delegacion.value.name, {'label_attr': {'class': 'form-check-label'}}) }}
-                    </div>
-                {% endfor %}
-                </div>
-                <div class="invalid-feedback">
-                    {{ form_errors(form.delegacion) }}
-                </div>
+    {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
+    <div class="form-check-group">
+        {% for child in form.delegacion %}
+            <div class="form-check mb-3"> <!-- Espacio entre cada checkbox -->
+                {{ form_widget(child, {'attr': {'class': 'form-check-input me-3'}}) }}
+                {{ form_label(child) }}
             </div>
+        {% endfor %}
+    </div>
+    <div class="invalid-feedback">
+        {{ form_errors(form.delegacion) }}
+    </div>
+</div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </div>

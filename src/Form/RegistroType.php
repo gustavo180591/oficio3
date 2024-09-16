@@ -46,12 +46,15 @@ class RegistroType extends AbstractType
                 'choice_label' => 'name',
             ])
             ->add('delegacion', EntityType::class, [
-                'class' => delegacion::class,
+                'class' => Delegacion::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true,  // Muestra las opciones como checkboxes
+                'expanded' => true,
+                'choice_attr' => function() {
+                    return ['class' => 'form-check-input me-3 mb-3']; // Espaciado entre opciones
+                },
             ])
-        ;
+;            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
