@@ -58,7 +58,7 @@ class RegistroController extends AbstractController
         $lista = $entityManager->getRepository(Registro::class)->findAll();
         // Renderizamos la vista y pasamos la lista de registros
         return $this->render('registro/lista.html.twig', [
-            'lista' => $lista,
+            'lista' => null,
             'form' => $form,
         ]);
     }

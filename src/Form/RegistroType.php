@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistroType extends AbstractType
 {
@@ -28,7 +29,15 @@ class RegistroType extends AbstractType
             ->add('workAddress')
             ->add('payment')
             ->add('time')
-            ->add('certification')
+            ->add('certification', ChoiceType::class, [
+                'choices'  => [
+                    'Sí' => true,
+                    'No' => false,
+                ],
+                'expanded' => true, // Esto hace que se renderice como checkboxes
+                'multiple' => false, // Solo se puede seleccionar una opción
+                'label' => 'Certificación',
+            ])
             ->add('institution')
             ->add('recomendation')
             ->add('images')
@@ -40,6 +49,7 @@ class RegistroType extends AbstractType
                 'class' => delegacion::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'expanded' => true,  // Muestra las opciones como checkboxes
             ])
         ;
     }

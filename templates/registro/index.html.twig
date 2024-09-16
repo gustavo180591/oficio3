@@ -33,7 +33,115 @@
                     {{ form_errors(form.date) }}
                 </div>
             </div>
+            <div class="mb-3">
+                {{ form_label(form.description, 'Descripción', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Descripción'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.description) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.phone, 'Teléfono', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Teléfono'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.phone) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.dni, 'DNI', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.dni, {'attr': {'class': 'form-control', 'placeholder': 'DNI'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.dni) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.address, 'Dirección', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Dirección'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.address) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.workAddress, 'Dirección de Trabajo (opcional)', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.workAddress, {'attr': {'class': 'form-control', 'placeholder': 'Dirección de Trabajo'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.workAddress) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.payment, 'Tipo de pago', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.payment, {'attr': {'class': 'form-control', 'placeholder': 'Tipo de pago'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.payment) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.time, 'Horario de trabajo', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.time, {'attr': {'class': 'form-control', 'placeholder': 'Horario de trabajo'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.time) }}
+                </div>
+            </div>
+    <div class="mb-3 d-flex align-items-center">
+    {{ form_label(form.certification, 'Certificación', {'label_attr': {'class': 'form-label me-2'}}) }}
 
+    <div class="form-check form-check-inline me-3">
+        {{ form_widget(form.certification.0, {'attr': {'class': 'form-check-input'}}) }}
+        {{ form_label(form.certification.0, 'Sí', {'label_attr': {'class': 'form-check-label'}}) }}
+    </div>
+
+    <div class="form-check form-check-inline">
+        {{ form_widget(form.certification.1, {'attr': {'class': 'form-check-input'}}) }}
+        {{ form_label(form.certification.1, 'No', {'label_attr': {'class': 'form-check-label'}}) }}
+    </div>
+
+    <div class="invalid-feedback">
+        {{ form_errors(form.certification) }}
+    </div>
+</div>
+            <div class="mb-3">
+                {{ form_label(form.institution, 'Institución', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.institution, {'attr': {'class': 'form-control', 'placeholder': 'Institución certificante'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.institution) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.recomendation, 'Recomendación', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.recomendation, {'attr': {'class': 'form-control', 'placeholder': 'Posee alguna recomendación'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.recomendation) }}
+                </div>
+            </div>
+              <div class="mb-3">
+                {{ form_label(form.images, 'Imagenes', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.images, {'attr': {'class': 'form-control', 'placeholder': 'Imagenes'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.images) }}
+                </div>
+            </div>
+            
+              <div class="mb-3">
+                {{ form_label(form.oficio, 'Oficio', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': 'Oficio'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.oficio) }}
+                </div>
+            </div>
+              <div class="mb-3">
+                {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
+                <div class="form-check">
+                {% for delegacion in form.delegacion %}
+                    <div class="form-check form-check-inline">
+                        {{ form_widget(delegacion, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(delegacion, delegacion.value.name, {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="invalid-feedback">
+                    {{ form_errors(form.delegacion) }}
+                </div>
+            </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
@@ -43,4 +151,3 @@
     </div>
 </div>
 {% endblock %}
-
