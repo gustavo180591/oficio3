@@ -8,7 +8,9 @@
     </div>
 <div class="min-vh-100 d-flex justify-content-center align-items-center  p-4">
     <div class="card shadow-lg w-100" style="max-width: 500px;">
-
+        <div class="d-grid gap-2 col-10 mx-auto my-2">
+        <a href="{{ path('app_lista') }}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
         <div class="card-body p-4">
             <h2 class="text-center mb-4">Formulario de Registro</h2>
 
@@ -65,6 +67,28 @@
                     {{ form_errors(form.address) }}
                 </div>
             </div>
+                        
+              <div class="mb-3">
+                {{ form_label(form.oficio, 'Oficio', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': 'Oficio'}}) }}
+                <div class="invalid-feedback">
+                    {{ form_errors(form.oficio) }}
+                </div>
+            </div>
+              <div class="mb-3">
+    {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
+    <div class="form-check-group">
+        {% for child in form.delegacion %}
+            <div class="form-check mb-3"> <!-- Espacio entre cada checkbox -->
+                {{ form_widget(child, {'attr': {'class': 'form-check-input me-3'}}) }}
+                {{ form_label(child) }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="invalid-feedback">
+        {{ form_errors(form.delegacion) }}
+    </div>
+</div>
             <div class="mb-3">
                 {{ form_label(form.workAddress, 'Dirección de Trabajo (opcional)', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.workAddress, {'attr': {'class': 'form-control', 'placeholder': 'Dirección de Trabajo'}}) }}
@@ -124,33 +148,12 @@
                     {{ form_errors(form.imageFile) }}
                 </div>
             </div>
-            
-              <div class="mb-3">
-                {{ form_label(form.oficio, 'Oficio', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': 'Oficio'}}) }}
-                <div class="invalid-feedback">
-                    {{ form_errors(form.oficio) }}
-                </div>
-            </div>
-              <div class="mb-3">
-    {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
-    <div class="form-check-group">
-        {% for child in form.delegacion %}
-            <div class="form-check mb-3"> <!-- Espacio entre cada checkbox -->
-                {{ form_widget(child, {'attr': {'class': 'form-check-input me-3'}}) }}
-                {{ form_label(child) }}
-            </div>
-        {% endfor %}
-    </div>
-    <div class="invalid-feedback">
-        {{ form_errors(form.delegacion) }}
-    </div>
-</div>
+
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
             
-            {{ form_end(form,{render_rest: false}) }}
+            {{ form_end(form) }}
 
         </div>
     </div>

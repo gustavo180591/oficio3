@@ -4,10 +4,14 @@
 
 {% block body %}
 <div class="container text-center my-4">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 400px;">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 500px;">
     </div>
 <div class=" d-flex justify-content-center  ">
+
     <div class="card shadow-lg w-100" style="max-width: 500px;">
+        <div class="d-grid gap-2 col-10 mx-auto my-2">
+        <a href="{{ path('app_registro') }}" class="btn btn-success">Registrarse</a>
+    </div>
         <div class="card-body p-4">
             <h2 class="text-center mb-4">Formulario de Búsqueda</h2>
 
@@ -48,7 +52,13 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ registro.name }}</h5>
                         <p class="card-text">
-                            Email: {{ registro.email }}
+                            Descripción: {{ registro.description }}
+                        </p>
+                        <p class="card-text">
+                            Horario de atención: {{ registro.time }}
+                        </p>
+                        <p class="card-text">
+                            Metodos de pago: {{ registro.payment }}
                         </p>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ registro.id }}">
                             Ver más
@@ -65,10 +75,24 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p><strong>ID:</strong> {{ registro.id }}</p>
+                                <p><strong>Nro. de registro:</strong> {{ registro.id }}</p>
                                 <p><strong>Nombre:</strong> {{ registro.name }}</p>
+                                <p><strong>Oficio:</strong> {{ registro.oficio.name }}</p>
+                                <p><strong>Descripción:</strong> {{ registro.description }}</p>
+                                <p><strong>Teléfono:</strong> {{ registro.phone }}</p>
                                 <p><strong>Email:</strong> {{ registro.email }}</p>
-                                <p><strong>Fecha de Registro:</strong> {{ registro.date|date('d/m/Y') }}</p>
+                                <p><strong>Horarios de atención:</strong> {{ registro.time }}</p>
+                                <p><strong>Metodos de pagos:</strong> {{ registro.payment }}</p>
+                                {% if registro.certification %}
+                                    <p><strong>Certificación:</strong> Si</p>
+                                    <p><strong>Institución certificante:</strong>  {{ registro.institution }}</p>
+
+                                {% else %}
+                                    <p><strong>Certificación:</strong> No</p>
+                                {% endif %}
+                                {% if registro.images %}
+                                    <p><strong>Imagenes:</strong> <a href="{{ asset('images/products/' ~ registro.images) }}" target="_blank"><img src="{{ asset('images/products/' ~ registro.images) }}" width="100" height="100"></a></p>
+                                {% endif %}
                                 <!-- Agrega más campos según sea necesario -->
                             </div>
                             <div class="modal-footer">
