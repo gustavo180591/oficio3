@@ -3,11 +3,12 @@
 {% block title %}Formulario de Registro{% endblock %}
 
 {% block body %}
-<div class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
-    <div class="card shadow-lg w-100" style="max-width: 500px;">
 <div class="container text-center my-5">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 200px;">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 400px;">
     </div>
+<div class="min-vh-100 d-flex justify-content-center align-items-center  p-4">
+    <div class="card shadow-lg w-100" style="max-width: 500px;">
+
         <div class="card-body p-4">
             <h2 class="text-center mb-4">Formulario de Registro</h2>
 
@@ -38,7 +39,7 @@
             </div>
             <div class="mb-3">
                 {{ form_label(form.description, 'Descripción', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Descripción'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Descripción de su actividad laboral'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.description) }}
                 </div>
@@ -86,7 +87,7 @@
                 </div>
             </div>
     <div class="mb-3 d-flex align-items-center">
-    {{ form_label(form.certification, 'Certificación', {'label_attr': {'class': 'form-label me-2'}}) }}
+    {{ form_label(form.certification, 'Posee Certificación?', {'label_attr': {'class': 'form-label me-2'}}) }}
 
     <div class="form-check form-check-inline me-3">
         {{ form_widget(form.certification.0, {'attr': {'class': 'form-check-input'}}) }}
@@ -117,10 +118,10 @@
                 </div>
             </div>
               <div class="mb-3">
-                {{ form_label(form.images, 'Imagenes', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.images, {'attr': {'class': 'form-control', 'placeholder': 'Imagenes'}}) }}
+                {{ form_label(form.imageFile, 'Imagen/logo', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'placeholder': 'Imagen/logo'}}) }}
                 <div class="invalid-feedback">
-                    {{ form_errors(form.images) }}
+                    {{ form_errors(form.imageFile) }}
                 </div>
             </div>
             
@@ -148,7 +149,8 @@
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Registrar</button>
             </div>
-            {{ form_end(form) }}
+            
+            {{ form_end(form,{render_rest: false}) }}
 
         </div>
     </div>

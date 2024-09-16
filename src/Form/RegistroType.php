@@ -11,6 +11,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use  Symfony\Component\Form\Extension\Core\Type\TextareaType as TextArea;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class RegistroType extends AbstractType
 {
@@ -19,7 +21,9 @@ class RegistroType extends AbstractType
         $builder
             ->add('name')
             ->add('email')
-            ->add('description')
+            ->add('description',TextArea::class, [
+                'attr' => ['maxlength' => 250],
+            ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
             ])
@@ -40,7 +44,7 @@ class RegistroType extends AbstractType
             ])
             ->add('institution')
             ->add('recomendation')
-            ->add('images')
+            ->add('imageFile', FileType::class)
             ->add('oficio', EntityType::class, [
                 'class' => oficio::class,
                 'choice_label' => 'name',
