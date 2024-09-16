@@ -96,8 +96,60 @@
                                 <!-- Agrega más campos según sea necesario -->
                             </div>
                             <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}">
+                                    Comentario
+                                </button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
+
+                             <!-- ACA EMPIEZA EL COMENTARIO -->
+                             <div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ registro.name }}</h5>
+        <p class="card-text">Descripción: {{ registro.description }}</p>
+        
+        <!-- Botón de Comentario -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}">
+            Comentario
+        </button>
+
+        <!-- Cuadro para comentarios y calificación -->
+        <div class="collapse mt-3" id="comentario-{{ registro.id }}">
+            <textarea class="form-control" id="comentario-text-{{ registro.id }}" rows="3" placeholder="Escribe tu comentario..." maxlength="250"></textarea>
+
+            <!-- Calificación de 1 a 5 estrellas -->
+            <div class="rating mt-3">
+                <h6>Calificación:</h6>
+                <div class="star-rating" id="star-rating-{{ registro.id }}">
+                    <input type="radio" name="rating-{{ registro.id }}" id="star5-{{ registro.id }}" value="5">
+                    <label for="star5-{{ registro.id }}" class="fas fa-star"></label>
+
+                    <input type="radio" name="rating-{{ registro.id }}" id="star4-{{ registro.id }}" value="4">
+                    <label for="star4-{{ registro.id }}" class="fas fa-star"></label>
+
+                    <input type="radio" name="rating-{{ registro.id }}" id="star3-{{ registro.id }}" value="3">
+                    <label for="star3-{{ registro.id }}" class="fas fa-star"></label>
+
+                    <input type="radio" name="rating-{{ registro.id }}" id="star2-{{ registro.id }}" value="2">
+                    <label for="star2-{{ registro.id }}" class="fas fa-star"></label>
+
+                    <input type="radio" name="rating-{{ registro.id }}" id="star1-{{ registro.id }}" value="1">
+                    <label for="star1-{{ registro.id }}" class="fas fa-star"></label>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-success mt-2" onclick="guardarComentario('{{ registro.id }}')">Enviar Comentario</button>
+        </div>
+
+        <!-- Área para mostrar el comentario guardado -->
+        <div class="mt-3" id="comentario-guardado-{{ registro.id }}">
+            <!-- Aquí se mostrará el comentario y la calificación una vez guardado -->
+        </div>
+    </div>
+</div>
+
+                            
+<!-- ACA TERMINA EL COMENTARIO -->
                         </div>
                     </div>
                 </div>
