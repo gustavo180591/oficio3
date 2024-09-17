@@ -4,14 +4,14 @@
 
 {% block body %}
 <div class="container text-center my-4">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 500px;">
-    </div>
-<div class=" d-flex justify-content-center  ">
+    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 500px;">
+</div>
+<div class="d-flex justify-content-center">
 
     <div class="card shadow-lg w-100" style="max-width: 500px;">
         <div class="d-grid gap-2 col-10 mx-auto my-2">
-        <a href="{{ path('app_registro') }}" class="btn btn-success">Registrarse</a>
-    </div>
+            <a href="{{ path('app_registro') }}" class="btn btn-success">Registrarse</a>
+        </div>
         <div class="card-body p-4">
             <h2 class="text-center mb-4">Formulario de Búsqueda</h2>
 
@@ -31,7 +31,7 @@
                 <div class="invalid-feedback">
                     {{ form_errors(form.delegacion) }}
                 </div>
-            </div>      
+            </div>
 
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Buscar</button>
@@ -51,15 +51,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ registro.name }}</h5>
-                        <p class="card-text">
-                            Descripción: {{ registro.description }}
-                        </p>
-                        <p class="card-text">
-                            Horario de atención: {{ registro.time }}
-                        </p>
-                        <p class="card-text">
-                            Metodos de pago: {{ registro.payment }}
-                        </p>
+                        <p class="card-text">Descripción: {{ registro.description }}</p>
+                        <p class="card-text">Horario de atención: {{ registro.time }}</p>
+                        <p class="card-text">Métodos de pago: {{ registro.payment }}</p>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ registro.id }}">
                             Ver más
                         </button>
@@ -67,6 +61,13 @@
                 </div>
 
                 <!-- Modal -->
+                <style>
+                    .modal-content {
+                        max-height: 80vh;
+                        overflow-y: scroll;
+                        padding: 2%;
+                    }
+                </style>
                 <div class="modal fade" id="modal-{{ registro.id }}" tabindex="-1" aria-labelledby="modalLabel-{{ registro.id }}" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -82,77 +83,67 @@
                                 <p><strong>Teléfono:</strong> {{ registro.phone }}</p>
                                 <p><strong>Email:</strong> {{ registro.email }}</p>
                                 <p><strong>Horarios de atención:</strong> {{ registro.time }}</p>
-                                <p><strong>Metodos de pagos:</strong> {{ registro.payment }}</p>
+                                <p><strong>Métodos de pago:</strong> {{ registro.payment }}</p>
                                 {% if registro.certification %}
-                                    <p><strong>Certificación:</strong> Si</p>
-                                    <p><strong>Institución certificante:</strong>  {{ registro.institution }}</p>
-
+                                    <p><strong>Certificación:</strong> Sí</p>
+                                    <p><strong>Institución certificante:</strong> {{ registro.institution }}</p>
                                 {% else %}
                                     <p><strong>Certificación:</strong> No</p>
                                 {% endif %}
                                 {% if registro.images %}
-                                    <p><strong>Imagenes:</strong> <a href="{{ asset('images/products/' ~ registro.images) }}" target="_blank"><img src="{{ asset('images/products/' ~ registro.images) }}" width="100" height="100"></a></p>
+                                    <p><strong>Imágenes:</strong> <a href="{{ asset('images/products/' ~ registro.images) }}" target="_blank"><img src="{{ asset('images/products/' ~ registro.images) }}" width="100" height="100"></a></p>
                                 {% endif %}
-                                <!-- Agrega más campos según sea necesario -->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}">
-                                    Comentario
+                                    Nuevo Comentario
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             </div>
 
-                             <!-- ACA EMPIEZA EL COMENTARIO -->
-                             <div class="card">
-    <div class="card-body">
-        <h5 class="card-title">{{ registro.name }}</h5>
-        <p class="card-text">Descripción: {{ registro.description }}</p>
-      
+                            <!-- Comentarios -->
+                            <div class="collapse mt-3" id="comentario-{{ registro.id }}">
+                                <h5>Nuevo comentario</h5>
+                                <p class="card-text">
+                                    <input type="text" id="name-{{ registro.id }}" placeholder="Ingrese su nombre">
+                                </p>
+                                <textarea class="form-control" id="comentario-text-{{ registro.id }}" rows="3" placeholder="Escribe tu comentario..." maxlength="250"></textarea>
+                                <div class="rating mt-3">
+                                    <h6>Calificación:</h6>
+                                    <div class="star-rating" id="star-rating-{{ registro.id }}">
+                                        {% for i in 1..5 %}
+                                            <input type="radio" name="rating-{{ registro.id }}" id="star{{ i }}-{{ registro.id }}" value="{{ i }}">
+                                            <label for="star{{ i }}-{{ registro.id }}">{{ i }}</label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-success mt-2" onclick="guardarComentario('{{ registro.id }}')">Enviar Comentario</button>
+                            </div>
 
-        <!-- Cuadro para comentarios y calificación -->
-        <div class="collapse mt-3" id="comentario-{{ registro.id }}">
-            <textarea class="form-control" id="comentario-text-{{ registro.id }}" rows="3" placeholder="Escribe tu comentario..." maxlength="250"></textarea>
+                            <!-- Comentarios guardados -->
+                            <div class="mt-3 border p-2 mb-2" id="comentario-guardado-{{ registro.id }}"></div>
 
-            <!-- Calificación de 1 a 5 estrellas -->
-            <div class="rating mt-3">
-                <h6>Calificación:</h6>
-                <div class="star-rating" id="star-rating-{{ registro.id }}">
-                    <input type="radio" name="rating-{{ registro.id }}" id="star1-{{ registro.id }}" value="1">
-                    <label for="star1-{{ registro.id }}">1</label>
-
-                    <input type="radio" name="rating-{{ registro.id }}" id="star2-{{ registro.id }}" value="2">
-                    <label for="star2-{{ registro.id }}">2</label>
-
-                    <input type="radio" name="rating-{{ registro.id }}" id="star3-{{ registro.id }}" value="3">
-                    <label for="star3-{{ registro.id }}">3</label>
-
-                    <input type="radio" name="rating-{{ registro.id }}" id="star4-{{ registro.id }}" value="4">
-                    <label for="star4-{{ registro.id }}">4</label>
-
-                    <input type="radio" name="rating-{{ registro.id }}" id="star5-{{ registro.id }}" value="5">
-                    <label for="star5-{{ registro.id }}">5</label>
-                </div>
-            </div>
-
-            <button type="button" class="btn btn-success mt-2" onclick="guardarComentario('{{ registro.id }}')">Enviar Comentario</button>
-        </div>
-
-        <!-- Área para mostrar el comentario guardado -->
-        <div class="mt-3" id="comentario-guardado-{{ registro.id }}">
-            <!-- Aquí se mostrará el comentario y la calificación una vez guardado -->
-        </div>
-    </div>
-</div>
-
-                            
-<!-- ACA TERMINA EL COMENTARIO -->
+                            <!-- Mostrar comentarios existentes -->
+                            <div class="mt-3">
+                                {% if registro.comments|length > 0 %}
+                                    {% for comment in registro.comments|reverse %}
+                                        <div class="border p-2 mb-2">
+                                            <p><strong>Nombre:</strong> {{ comment.name }}</p>
+                                            <p><strong>Calificación:</strong> 
+                                                {% for i in 1..comment.calification %}
+                                                    ⭐
+                                                {% endfor %}
+                                            </p>
+                                            <p><strong>Comentario:</strong> {{ comment.comment }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No hay comentarios para mostrar.</p>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% else %}
-            <div class="col-12">
-                <div class="alert alert-info text-center">No hay registros disponibles</div>
             </div>
         {% endfor %}
     </div>

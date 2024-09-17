@@ -19,9 +19,7 @@ class RegistroController extends AbstractController
     {
         $registro = new Registro();
         // ...
-
         $form = $this->createForm(RegistroType::class, $registro);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($registro);
@@ -29,7 +27,6 @@ class RegistroController extends AbstractController
             $nombre=$registro->getName();
             return $this->render('registro/success.html.twig', ['nombre' => $nombre]);
         }
-
         return $this->render('registro/index.html.twig', [
             'controller_name' => 'RegistroController',
             'form' => $form,
@@ -47,7 +44,7 @@ class RegistroController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $oficio=$registro->getOficio();
             $delegacion=$registro->getDelegacion(); 
-            $delegaciones = $registro->getDelegacion()->toArray();         
+            $delegaciones = $registro->getDelegacion()->toArray(); 
             $lista = $entityManager->getRepository(Registro::class)->buscar($oficio, $delegaciones);
                         return $this->render('registro/lista.html.twig', [
                             'lista' => $lista,
@@ -55,12 +52,15 @@ class RegistroController extends AbstractController
             ]);
         }
 
-        $lista = $entityManager->getRepository(Registro::class)->findAll();
+        
+         $lista = $entityManager->getRepository(Registro::class)->findAll();
         // Renderizamos la vista y pasamos la lista de registros
         return $this->render('registro/lista.html.twig', [
             'lista' => null,
             'form' => $form,
         ]);
     }
+
+
 
 }

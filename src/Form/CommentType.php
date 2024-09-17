@@ -3,29 +3,41 @@
 namespace App\Form;
 
 use App\Entity\Comment;
-use App\Entity\Oficio;
-use App\Entity\Registro;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('name')
-            ->add('calification')
-            ->add('comment')
-            ->add('registro', EntityType::class, [
-                'class' => Registro::class,
-                'choice_label' => 'id',
+            ->add('registro_id', HiddenType::class)
+            ->add('calification', ChoiceType::class, [
+                'choices' => [
+                    '1 Star' => 1,
+                    '2 Stars' => 2,
+                    '3 Stars' => 3,
+                    '4 Stars' => 4,
+                    '5 Stars' => 5,
+                ],
+                'expanded' => true,
+                'multiple' => false,
             ])
-        ;
+            ->add('comment', TextareaType::class, [
+                'required' => true,
+                'attr' => ['rows' => 3],
+            ])
+            ->add('name', TextareaType::class, [
+                'required' => true,
+                'attr' => ['rows' => 1],
+            ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Comment::class,
