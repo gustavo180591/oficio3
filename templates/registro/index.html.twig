@@ -32,8 +32,8 @@
                 </div>
             </div>          
             <div class="mb-3">
-                {{ form_label(form.date, 'FECHA DE NACIMIENTO', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'DD/MM/AAAA'}}) }}
+                {{ form_label(form.date, 'FECHA DE NACIMIENTO Ej: 01-01-2000', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'DD-MM-AAAA'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.date) }}
                 </div>
@@ -142,17 +142,13 @@
                     {{ form_errors(form.recomendation) }}
                 </div>
             </div>
-
-
-              <div class="mb-3">
+            <div class="mb-3">
     {{ form_label(form.imageFile, 'IMAGEN/LOGO (OPCIONAL)', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
-    {{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'placeholder': 'Seleccionar Imagen/Logo'}}) }}
+    {{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'placeholder': 'Seleccionar Imagen/Logo', 'required': false}}) }}
     <div class="invalid-feedback">
         {{ form_errors(form.imageFile) }}
     </div>
 </div>
-
-
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary text-uppercase">REGISTRAR</button>
             </div>
