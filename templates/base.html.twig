@@ -93,8 +93,13 @@
                     console.error('Error:', error);
                 });
         }
-    </script>
 
+    </script>
+<style>
+.custom-file-input ~ .custom-file-label::after {
+    content: "Seleccionar Archivo";
+}
+  </style>
     {% endblock %}
 </body>
 </html>

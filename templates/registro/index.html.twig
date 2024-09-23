@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formulario de Registro{% endblock %}
+{% block title %}FORMULARIO DE REGISTRO{% endblock %}
 
 {% block body %}
 <div class="container text-center my-5">
@@ -9,46 +9,45 @@
 <div class="min-vh-100 d-flex justify-content-center align-items-center  p-4">
     <div class="card shadow-lg w-100" style="max-width: 500px;">
         <div class="d-grid gap-2 col-10 mx-auto my-2">
-        <a href="{{ path('app_lista') }}" class="btn btn-secondary">Volver al inicio</a>
+        <a href="{{ path('app_lista') }}" class="btn btn-secondary">VOLVER AL INICIO</a>
     </div>
         <div class="card-body p-4">
-            <h2 class="text-center mb-4">Formulario de Registro</h2>
+            <h2 class="text-center mb-4">FORMULARIO DE REGISTRO</h2>
 
             {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
 
             <div class="mb-3">
-                {{ form_label(form.name, 'Nombre', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese su nombre'}}) }}
+                {{ form_label(form.name, 'NOMBRE', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'INGRESE SU NOMBRE'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.name) }}
                 </div>
             </div>
 
             <div class="mb-3">
-                {{ form_label(form.email, 'Correo Electrónico', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Ingrese su correo'}}) }}
+                {{ form_label(form.email, 'CORREO ELECTRÓNICO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'INGRESE SU CORREO'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.email) }}
                 </div>
-            </div>
-
+            </div>          
             <div class="mb-3">
-                {{ form_label(form.date, 'Fecha de Nacimiento', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(form.date, 'FECHA DE NACIMIENTO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'DD/MM/AAAA'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.date) }}
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.description, 'Descripción', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Descripción de su actividad laboral'}}) }}
+                {{ form_label(form.description, 'DESCRIPCIÓN', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'DESCRIPCIÓN DE SU ACTIVIDAD LABORAL'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.description) }}
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.phone, 'Teléfono', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Teléfono'}}) }}
+                {{ form_label(form.phone, 'TELÉFONO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'TELÉFONO'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.phone) }}
                 </div>
@@ -61,22 +60,51 @@
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.address, 'Dirección', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'Dirección'}}) }}
+                {{ form_label(form.address, 'DIRECCIÓN', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.address, {'attr': {'class': 'form-control', 'placeholder': 'DIRECCIÓN'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.address) }}
                 </div>
             </div>
                         
               <div class="mb-3">
-                {{ form_label(form.oficio, 'Oficio', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': 'Oficio'}}) }}
+                {{ form_label(form.oficio, 'OFICIO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': '-- SELECCIONAR OFICIO --', 'style': 'text-transform: uppercase'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.oficio) }}
                 </div>
+
+                <!-- DESDE ACA PARA AGREGAR OFICIO -->
+                
+                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalAddOficio">
+                    ¿TU OFICIO NO SE ENCUENTRA EN LA LISTA?
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalAddOficio" tabindex="-1" aria-labelledby="modalAddOficioLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalAddOficioLabel">AGREGAR OFICIO</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ path('app_oficio_nuevo') }}" method="post">
+                                    <div class="mb-3">
+                                        <label for="oficio_name" class="form-label">NOMBRE DEL OFICIO</label>
+                                        <input type="text" class="form-control" id="oficio_name" name="oficio[name]" placeholder="ESCRIBA AQUÍ SU OFICIO" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" onclick="document.getElementById('modalAddOficio').close()">
+                                    AGREGAR OFICIO
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <!-- HASTA ACA PARA AGREGAR OFICIO -->
             </div>
               <div class="mb-3">
-    {{ form_label(form.delegacion, 'Delegación', {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_label(form.delegacion, 'DELEGACIÓN', {'label_attr': {'class': 'form-label'}}) }}
     <div class="form-check-group">
         {% for child in form.delegacion %}
             <div class="form-check mb-3"> <!-- Espacio entre cada checkbox -->
@@ -90,37 +118,37 @@
     </div>
 </div>
             <div class="mb-3">
-                {{ form_label(form.workAddress, 'Dirección de Trabajo (opcional)', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.workAddress, {'attr': {'class': 'form-control', 'placeholder': 'Dirección de Trabajo'}}) }}
+                {{ form_label(form.workAddress, 'DIRECCIÓN DE TRABAJO (OPCIONAL)', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.workAddress, {'attr': {'class': 'form-control', 'placeholder': 'DIRECCIÓN DE TRABAJO'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.workAddress) }}
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.payment, 'Tipo de pago', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.payment, {'attr': {'class': 'form-control', 'placeholder': 'Tipo de pago'}}) }}
+                {{ form_label(form.payment, 'TIPO DE PAGO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.payment, {'attr': {'class': 'form-control', 'placeholder': 'TIPO DE PAGO'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.payment) }}
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.time, 'Horario de trabajo', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.time, {'attr': {'class': 'form-control', 'placeholder': 'Horario de trabajo'}}) }}
+                {{ form_label(form.time, 'HORARIO DE TRABAJO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.time, {'attr': {'class': 'form-control', 'placeholder': 'HORARIO DE TRABAJO'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.time) }}
                 </div>
             </div>
     <div class="mb-3 d-flex align-items-center">
-    {{ form_label(form.certification, 'Posee Certificación?', {'label_attr': {'class': 'form-label me-2'}}) }}
+    {{ form_label(form.certification, '¿POSEE CERTIFICACIÓN?', {'label_attr': {'class': 'form-label me-2'}}) }}
 
     <div class="form-check form-check-inline me-3">
         {{ form_widget(form.certification.0, {'attr': {'class': 'form-check-input'}}) }}
-        {{ form_label(form.certification.0, 'Sí', {'label_attr': {'class': 'form-check-label'}}) }}
+        {{ form_label(form.certification.0, 'SÍ', {'label_attr': {'class': 'form-check-label'}}) }}
     </div>
 
     <div class="form-check form-check-inline">
         {{ form_widget(form.certification.1, {'attr': {'class': 'form-check-input'}}) }}
-        {{ form_label(form.certification.1, 'No', {'label_attr': {'class': 'form-check-label'}}) }}
+        {{ form_label(form.certification.1, 'NO', {'label_attr': {'class': 'form-check-label'}}) }}
     </div>
 
     <div class="invalid-feedback">
@@ -128,29 +156,32 @@
     </div>
 </div>
             <div class="mb-3">
-                {{ form_label(form.institution, 'Institución', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.institution, {'attr': {'class': 'form-control', 'placeholder': 'Institución certificante'}}) }}
+                {{ form_label(form.institution, 'INSTITUCIÓN', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.institution, {'attr': {'class': 'form-control', 'placeholder': 'INSTITUCIÓN CERTIFICANTE'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.institution) }}
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.recomendation, 'Recomendación', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.recomendation, {'attr': {'class': 'form-control', 'placeholder': 'Posee alguna recomendación'}}) }}
+                {{ form_label(form.recomendation, 'RECOMENDACIÓN', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
+                {{ form_widget(form.recomendation, {'attr':{'class': 'form-control text-uppercase', 'placeholder': 'POSEE ALGUNA RECOMENDACIÓN'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.recomendation) }}
                 </div>
             </div>
+
+
               <div class="mb-3">
-                {{ form_label(form.imageFile, 'Imagen/logo', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'placeholder': 'Imagen/logo'}}) }}
-                <div class="invalid-feedback">
-                    {{ form_errors(form.imageFile) }}
-                </div>
-            </div>
+    {{ form_label(form.imageFile, 'IMAGEN/LOGO', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
+    {{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'placeholder': 'Seleccionar Imagen/Logo'}}) }}
+    <div class="invalid-feedback">
+        {{ form_errors(form.imageFile) }}
+    </div>
+</div>
+
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="submit" class="btn btn-primary text-uppercase">REGISTRAR</button>
             </div>
             
             {{ form_end(form) }}
@@ -159,3 +190,4 @@
     </div>
 </div>
 {% endblock %}
+

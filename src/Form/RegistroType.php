@@ -25,7 +25,12 @@ class RegistroType extends AbstractType
                 'attr' => ['maxlength' => 250],
             ])
             ->add('date', DateType::class, [
-                'widget' => 'single_text',
+                'widget'=>'single_text',
+        'format' => 'dd-MM-yyyy',
+
+        // 2. Disable HTML5 option
+        'html5' => false
+                
             ])
             ->add('phone')
             ->add('dni')
