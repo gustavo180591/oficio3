@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container text-center my-5">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 400px;">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 500px;">
     </div>
 <div class="min-vh-100 d-flex justify-content-center align-items-center  p-4">
     <div class="card shadow-lg w-100" style="max-width: 500px;">
@@ -69,39 +69,12 @@
                         
               <div class="mb-3">
                 {{ form_label(form.oficio, 'OFICIO', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': '-- SELECCIONAR OFICIO --', 'style': 'text-transform: uppercase'}}) }}
+                {{ form_widget(form.oficio, {'attr': {'class': 'form-control', 'placeholder': '-- SELECCIONAR UN OFICIO --', 'style': 'text-transform: uppercase'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.oficio) }}
                 </div>
 
-                <!-- DESDE ACA PARA AGREGAR OFICIO -->
-                
-                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modalAddOficio">
-                    ¿TU OFICIO NO SE ENCUENTRA EN LA LISTA?
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="modalAddOficio" tabindex="-1" aria-labelledby="modalAddOficioLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalAddOficioLabel">AGREGAR OFICIO</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ path('app_oficio_nuevo') }}" method="post">
-                                    <div class="mb-3">
-                                        <label for="oficio_name" class="form-label">NOMBRE DEL OFICIO</label>
-                                        <input type="text" class="form-control" id="oficio_name" name="oficio[name]" placeholder="ESCRIBA AQUÍ SU OFICIO" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-success" onclick="document.getElementById('modalAddOficio').close()">
-                                    AGREGAR OFICIO
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                <!-- HASTA ACA PARA AGREGAR OFICIO -->
+               
             </div>
               <div class="mb-3">
     {{ form_label(form.delegacion, 'DELEGACIÓN', {'label_attr': {'class': 'form-label'}}) }}
@@ -172,7 +145,7 @@
 
 
               <div class="mb-3">
-    {{ form_label(form.imageFile, 'IMAGEN/LOGO', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
+    {{ form_label(form.imageFile, 'IMAGEN/LOGO (OPCIONAL)', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
     {{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'placeholder': 'Seleccionar Imagen/Logo'}}) }}
     <div class="invalid-feedback">
         {{ form_errors(form.imageFile) }}

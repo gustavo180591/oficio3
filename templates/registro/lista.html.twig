@@ -59,7 +59,7 @@ LISTA DE REGISTROS
     
 {% block body %}
 <div class="container text-center my-4">
-    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 200px;">
+    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 400px;">
 </div>
 <div class="d-flex justify-content-center">
 
@@ -85,8 +85,8 @@ LISTA DE REGISTROS
                         'class': 'form-select',
                         'style': 'font-size: 1.5rem; text-transform: uppercase'
                     },
-                    'placeholder': '-- SELECCIONAR OFICIO --',
-                    'empty_data': '-- SELECCIONAR OFICIO --'
+                    'placeholder': '-- SELECCIONAR UN OFICIO --',
+                    'empty_data': '-- SELECCIONAR UN OFICIO --'
                 }) }}
                 <div class="invalid-feedback" style="font-size: 1.5rem;">
                     {{ form_errors(form.oficio) }}
@@ -165,7 +165,7 @@ LISTA DE REGISTROS
                                     <p><strong>CERTIFICACIÓN:</strong> NO</p>
                                 {% endif %}
                                 {% if registro.images %}
-                                    <p><strong>IMÁGENES:</strong> <a href="{{ asset('images/products/' ~ registro.images) }}" target="_blank"><img src="{{ asset('images/products/' ~ registro.images) }}" width="100" height="100"></a></p>
+                                    <p><strong>IMÁGENES:</strong> {% if registro.images %}<a href="{{ asset('images/products/' ~ registro.images) }}" target="_blank"><img src="{{ asset('images/products/' ~ registro.images) }}" width="100" height="100"></a>{% endif %}</p>
                                 {% endif %}
                             </div>
                             <div class="modal-footer">
