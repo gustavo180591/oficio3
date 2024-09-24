@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OficioController extends AbstractController
 {
-        #[Route('/oficio', name: 'app_oficio', methods: ['POST'])]
+        #[Route('/', name: 'app_oficio', methods: ['POST'])]
     public function index(EntityManagerInterface $entityManager, Request $request): Response
     {
         return $this->render('oficio/index.html.twig', [

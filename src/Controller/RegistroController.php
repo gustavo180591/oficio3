@@ -33,7 +33,7 @@ class RegistroController extends AbstractController
         ]);
     }
     
-    #[Route('/', name: 'app_lista')]
+    #[Route('/lista', name: 'app_lista')]
     public function lista(EntityManagerInterface $entityManager, Request $request): Response
     {
         // Obtenemos todos los registros de la entidad 'Registro'
