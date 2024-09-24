@@ -59,7 +59,7 @@ LISTA DE REGISTROS
     
 {% block body %}
 <div class="container text-center my-4">
-    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 400px;">
+    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 75%;">
 </div>
 <div class="d-flex justify-content-center">
 
@@ -78,23 +78,21 @@ LISTA DE REGISTROS
 
 
             <div class="mb-3 row">
-            <div class="col">
-                {{ form_label(form.oficio, 'OFICIO', {'label_attr': {'class': 'form-label', 'style': 'font-size: 1.5rem;'}}) }}
-                {{ form_widget(form.oficio, {
-                    'attr': {
-                        'class': 'form-select',
-                        'style': 'font-size: 1.5rem; text-transform: uppercase'
-                    },
-                    'placeholder': '-- SELECCIONAR UN OFICIO --',
-                    'empty_data': '-- SELECCIONAR UN OFICIO --'
-                }) }}
-                <div class="invalid-feedback" style="font-size: 1.5rem;">
-                    {{ form_errors(form.oficio) }}
+                <div class="col-md-6">
+                    {{ form_label(form.oficio, 'OFICIO', {'label_attr': {'class': 'form-label', 'style': 'font-size: 1.5rem;'}}) }}
+                    {{ form_widget(form.oficio, {
+                        'attr': {
+                            'class': 'form-select',
+                            'style': 'font-size: 1.5rem; text-transform: uppercase'
+                        },
+                        'placeholder': '-- SELECCIONAR UN OFICIO --',
+                        'empty_data': '-- SELECCIONAR UN OFICIO --'
+                    }) }}
+                    <div class="invalid-feedback" style="font-size: 1.5rem;">
+                        {{ form_errors(form.oficio) }}
+                    </div>
                 </div>
-            </div>
-
-
-                <div class="col">
+                <div class="col-md-6">
                     {{ form_label(form.delegacion, 'DELEGACIÓN', {'label_attr': {'class': 'form-label', 'style': 'font-size: 1.5rem;'}}) }}
                     {{ form_widget(form.delegacion, {'attr': {'class': 'form-control', 'placeholder': 'INGRESE DELEGACIÓN', 'style': 'font-size: 1.5rem;'}}) }}
                     <div class="invalid-feedback" style="font-size: 1.5rem;">
@@ -169,7 +167,7 @@ LISTA DE REGISTROS
                                 {% endif %}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}" style="height: 50px; width: 150px;">
+                                <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}" style="height: 50px; width: 150px; font-size: 1rem;">
                                     <span class="text-center">NUEVO COMENTARIO</span>
                                 </button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
@@ -204,13 +202,9 @@ LISTA DE REGISTROS
                                 {% if registro.comments|length > 0 %}
                                     {% for comment in registro.comments|reverse %}
                                         <div class="border p-2 mb-2">
-                                            <p><strong>NOMBRE:</strong> {{ comment.name|upper }}</p>
-                                            <p><strong>CALIFICACIÓN:</strong> 
-                                                {% for i in 1..comment.calification %}
-                                                           ⭐
-                                                {% endfor %}
-                                            </p>
-                                            <p><strong>COMENTARIO:</strong> {{ comment.comment|upper }}</p>
+                                            <p><strong>NOMBRE: </strong>{{ comment.name|upper }}
+                                            <strong>CALIFICACIÓN: </strong>{% for i in 1..comment.calification %}⭐{% endfor %}
+                                            <strong>COMENTARIO: </strong>{{ comment.comment|upper }}</p>
                                         </div>
                                     {% endfor %}
                                 {% else %}
@@ -225,5 +219,7 @@ LISTA DE REGISTROS
     </div>
 </div>
 {% endblock %}
+
+
 
 
