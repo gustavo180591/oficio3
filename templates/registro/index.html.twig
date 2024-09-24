@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}FORMULARIO DE REGISTRO{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Incluye Bootstrap CSS si no está ya incluido -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
 {% block body %}
 <div class="container text-center my-5">
         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 75%;">
@@ -73,6 +77,14 @@
                 <div class="invalid-feedback">
                     {{ form_errors(form.oficio) }}
                 </div>
+
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recomendacionModal">
+                    Añadir Recomendación
+                </button>
+            </div>
+
+            <!-- Modal -->
 
                
             </div>
@@ -156,7 +168,38 @@
             {{ form_end(form) }}
 
         </div>
+                    <div class="modal fade" id="recomendacionModal" tabindex="-1" role="dialog" aria-labelledby="recomendacionModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="recomendacionModalLabel">Nueva Recomendación</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="recomendacionForm" method="POST" action="{{ path('crear_recomendacion') }}">
+                                <div class="form-group">
+                                    <label for="recomendacionText">Texto de la Recomendación</label>
+                                    <input type="text" class="form-control" id="recomendacionText" name="recomendacionText" required>
+                                </div>
+                                <!-- Puedes añadir más campos si es necesario -->
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" form="recomendacionForm" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Incluye jQuery y Bootstrap JS si no están ya incluidos -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
