@@ -4,19 +4,22 @@
 
 {% block body %}
 <div class="container text-center my-5">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 75%;">
+        </div>
     </div>
     <div class="registration-success">
-        <div class="card mx-auto" style="width: 40rem;">
+        <div class="card mx-auto" style="width: 100%;">
             <div class="card-body">
                 <h1 class="card-title">¡Muchas Gracias {{nombre}}!</h1>
                 <p class="card-text">Solicitud fue registrada con éxito. Será verificada en las próximas 24 hs.</p>
-                
             </div>
             <div class="d-grid gap-2 col-10 mx-auto my-2">
-        <a href="{{ path('app_lista') }}" class="btn btn-secondary">Volver al inicio</a>
-    </div>
+                <a href="{{ path('app_lista') }}" class="btn btn-secondary">Volver al inicio</a>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
