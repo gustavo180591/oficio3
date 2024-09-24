@@ -79,8 +79,8 @@
                 </div>
 
             <div class="mb-3">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recomendacionModal">
-                    Añadir Recomendación
+                <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#recomendacionModal">
+                    SOLICITAR LA INSCRIPCION DE UN OFICIO 
                 </button>
             </div>
 
@@ -172,7 +172,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="recomendacionModalLabel">Nueva Recomendación</h5>
+                            <h5 class="modal-title" id="recomendacionModalLabel">SOLICITUD DE OFICIO</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -180,7 +180,7 @@
                         <div class="modal-body">
                             <form id="recomendacionForm" method="POST" action="{{ path('crear_recomendacion') }}">
                                 <div class="form-group">
-                                    <label for="recomendacionText">Texto de la Recomendación</label>
+                                    <label for="recomendacionText">POR FAVOR INGRESE UNA DESCRIPCION DEL OFICIO QUE DESEA SOLICITAR (LA SOLICITUD ESTA SUJETA A APROBACION)</label>
                                     <input type="text" class="form-control" id="recomendacionText" name="recomendacionText" required>
                                 </div>
                                 <!-- Puedes añadir más campos si es necesario -->
