@@ -30,11 +30,10 @@
                     {{ form_errors(form.delegacion) }}
                 </div>
             </div>      
-                        <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            </div>
+                        <a href="{{ path('app_registro') }}" class="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition">
+                REGISTRARSE
+            </a>
             {{ form_end(form) }}
-
         </div>
     </div>
     </div>

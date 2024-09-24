@@ -33,6 +33,6 @@ class RecomendacionController extends AbstractController
         }
 
         // Redirigir o mostrar un mensaje
-        return $this->redirectToRoute('homepage'); // Ajusta la ruta a tu página deseada
+        return $this->render('oficio/success.html.twig');
     }
 }

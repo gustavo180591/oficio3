@@ -49,7 +49,9 @@ class RegistroType extends AbstractType
             ])
             ->add('institution')
             ->add('recomendation')
-            ->add('imageFile', FileType::class)
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+            ])
             ->add('oficio', EntityType::class, [
                 'class' => oficio::class,
                 'choice_label' => 'name',

@@ -13,7 +13,7 @@
 <div class="min-vh-100 d-flex justify-content-center align-items-center  p-4">
     <div class="card shadow-lg w-100" style="max-width: 500px;">
         <div class="d-grid gap-2 col-10 mx-auto my-2">
-        <a href="{{ path('app_lista') }}" class="btn btn-secondary">VOLVER AL INICIO</a>
+        <a href="{{ path('app_oficio') }}" class="btn btn-secondary">VOLVER AL INICIO</a>
     </div>
         <div class="card-body p-4">
             <h2 class="text-center mb-4">FORMULARIO DE REGISTRO</h2>
@@ -79,8 +79,8 @@
                 </div>
 
             <div class="mb-3">
-                <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#recomendacionModal">
-                    SOLICITAR LA INSCRIPCION DE UN OFICIO 
+                <button type="button" class="btn mt-4" style="border-radius: 0.5rem; border: 2px solid #007bff; background: transparent; color: black" data-toggle="modal" data-target="#recomendacionModal">
+                    ¿TU OFICIO NO ESTÁ EN LA LISTA?
                 </button>
             </div>
 
@@ -162,7 +162,7 @@
     </div>
 </div>
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary text-uppercase">REGISTRAR</button>
+                <button type="submit" class="btn btn-primary text-uppercase">REGISTRARSE</button>
             </div>
             
             {{ form_end(form) }}
@@ -180,15 +180,15 @@
                         <div class="modal-body">
                             <form id="recomendacionForm" method="POST" action="{{ path('crear_recomendacion') }}">
                                 <div class="form-group">
-                                    <label for="recomendacionText">POR FAVOR INGRESE UNA DESCRIPCION DEL OFICIO QUE DESEA SOLICITAR (LA SOLICITUD ESTA SUJETA A APROBACION)</label>
+                                    <label for="recomendacionText">POR FAVOR INGRESE UNA DESCRIPCIÓN DEL OFICIO QUE DESEA SOLICITAR (LA SOLICITUD ESTÁ SUJETA A APROBACIÓN)</label>
                                     <input type="text" class="form-control" id="recomendacionText" name="recomendacionText" required>
                                 </div>
                                 <!-- Puedes añadir más campos si es necesario -->
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" form="recomendacionForm" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                            <button type="submit" form="recomendacionForm" class="btn btn-primary">ENVIAR</button>
                         </div>
                     </div>
                 </div>
@@ -202,4 +202,7 @@
     <!-- Incluye jQuery y Bootstrap JS si no están ya incluidos -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="bg-orange-500 w-full py-4 mt-auto text-center text-white">
+       
+    </footer>
 {% endblock %}
