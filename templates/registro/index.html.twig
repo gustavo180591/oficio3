@@ -22,8 +22,8 @@
             {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
 
             <div class="mb-3">
-                {{ form_label(form.name, 'NOMBRE', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'INGRESE SU NOMBRE'}}) }}
+                {{ form_label(form.name, 'NOMBRE Y APELLIDO', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'INGRESE SU NOMBRE Y APELLIDO'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.name) }}
                 </div>
@@ -149,8 +149,8 @@
                 </div>
             </div>
             <div class="mb-3">
-                {{ form_label(form.recomendation, 'RECOMENDACIÓN', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
-                {{ form_widget(form.recomendation, {'attr':{'class': 'form-control text-uppercase', 'placeholder': 'POSEE ALGUNA RECOMENDACIÓN'}}) }}
+                {{ form_label(form.recomendation, 'REFERENCIA LABORAL', {'label_attr': {'class': 'form-label text-uppercase'}}) }}
+                {{ form_widget(form.recomendation, {'attr':{'class': 'form-control text-uppercase', 'placeholder': 'POSEE ALGUNA REFERENCIA LABORAL'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.recomendation) }}
                 </div>

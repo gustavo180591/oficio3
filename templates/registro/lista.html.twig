@@ -167,10 +167,10 @@ LISTA DE REGISTROS
                                 {% endif %}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}" style="height: 50px; width: 150px; font-size: 1rem;">
-                                    <span class="text-center">NUEVO COMENTARIO</span>
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                                <div class="d-flex justify-content-between gap-2">
+                                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center flex-grow-1" data-bs-toggle="collapse" data-bs-target="#comentario-{{ registro.id }}" style="height: 50px;"><span class="text-center">NUEVO COMENTARIO</span></button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="height: 50px;">CERRAR</button>
+                                </div>
                             </div>
 
                             <!-- Comentarios -->
