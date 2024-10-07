@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listado completo{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Listado de Oficios, Recomendaciones y Registros</h1>
+
+    <!-- Tabla de Oficios -->
+    <h2>Oficios</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for oficio in oficios %}
+                <tr>
+                    <td>{{ oficio.id }}</td>
+                    <td>{{ oficio.name }}</td>
+                    
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No se encontraron oficios</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Tabla de Recomendaciones -->
+    <h2>Recomendaciones</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Texto</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recomendacion in recomendaciones %}
+                <tr>
+                    <td>{{ recomendacion.id }}</td>
+                    <td>{{ recomendacion.text }}</td>
+                    <td>{{ recomendacion.date|date('d/m/Y') }}</td>
+                    
+                    </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No se encontraron recomendaciones</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Tabla de Registros -->
+    <h2>Registros</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+                <tr>
+                    <td>{{ registro.id }}</td>
+                    <td>{{ registro.name }}</td>
+                    <td>{{ registro.description }}</td>
+                    <td>{{ registro.date|date('d/m/Y') }}</td>
+                    <td>{{ registro.phone }}</td>
+                   
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">No se encontraron registros</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
