@@ -24,6 +24,11 @@ class Oficio
     #[ORM\OneToMany(targetEntity: Registro::class, mappedBy: 'oficio')]
     private Collection $registros;
 
+    #[ORM\Column]
+    private ?bool $status = null;
+
+
+
     public function __construct()
     {
         $this->registros = new ArrayCollection();
@@ -75,4 +80,19 @@ class Oficio
 
         return $this;
     }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+
+
 }

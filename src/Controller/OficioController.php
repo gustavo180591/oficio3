@@ -24,5 +24,25 @@ class OficioController extends AbstractController
     {
         return $this->render('oficio/index.html.twig');
     }
+    #[Route('/oficio/{id}/toggle-status', name: 'oficio_toggle_status', methods: ['POST'])]
+    public function toggleStatus($id, Request $request, EntityManagerInterface $em): JsonResponse
+    {
+        $oficio = $em->getRepository(Oficio::class)->find($id);
+
+        if (!$oficio) {
+            return new JsonResponse(['error' => 'Oficio no encontrado'], 404);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        if (!isset($data['status'])) {
+            return new JsonResponse(['error' => 'Estado no proporcionado'], 400);
+        }
+
+        $oficio->setStatus($data['status']);
+        $em->persist($oficio);
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
+    }
 }
 
