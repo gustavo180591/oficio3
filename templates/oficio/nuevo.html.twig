@@ -15,6 +15,14 @@
                         <label for="nombreOficio" class="form-label">Nombre del Oficio</label>
                         <input type="text" class="form-control" id="nombreOficio" name="nombreOficio" placeholder="Ingrese el nombre del oficio" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="statusOficio" class="form-label">Estado del Oficio</label>
+                        <select class="form-select" id="statusOficio" name="statusOficio" required>
+                            <option value="" selected>Seleccione una opción</option>
+                            <option value="1">Habilitado</option>
+                            <option value="0">Deshabilitado</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Agregar</button>
                 </form>
             </div>

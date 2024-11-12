@@ -6,6 +6,11 @@
 <div class="container">
     <h1 class="my-4">Listado de Oficios</h1>
 
+    {# Botón para abrir el modal de agregar oficio #}
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalAddOficio">
+        Crear Nuevo Oficio
+    </button>
+
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -38,7 +43,27 @@
     </table>
 </div>
 
-<!-- Código JavaScript para manejar el estado -->
+<!-- Modal para agregar oficio -->
+<div class="modal fade" id="modalAddOficio" tabindex="-1" aria-labelledby="modalAddOficioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAddOficioLabel">Agregar Oficio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="recomendacionForm" action="{{ path('app_oficio_nuevo') }}" method="post">
+                    <div class="mb-3">
+                        <label for="nombreOficio" class="form-label">Nombre del Oficio</label>
+                        <input type="text" class="form-control" id="nombreOficio" name="nombreOficio" placeholder="Ingrese el nombre del oficio" required>
+                    </div>
+                    <button type="submit" form="recomendacionForm" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     async function toggleStatus(button) {
         const id = button.getAttribute('data-id');
@@ -56,15 +81,12 @@
             });
 
             if (!response.ok) {
-                // Si la respuesta no es exitosa, lanza un error silencioso (sin alert)
                 console.error('Error en la respuesta del servidor.');
                 return;
             }
 
-            // Si todo va bien, recargamos la página
             window.location.reload();
         } catch (error) {
-            // Manejamos el error silenciosamente en consola para no molestar al usuario
             console.error('Error:', error);
         }
     }

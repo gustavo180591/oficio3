@@ -19,10 +19,28 @@ class OficioController extends AbstractController
         ]);
     }
     
-    #[Route('/oficio/nuevo', name: 'app_oficio_nuevo')]
-    public function nuevo(): Response
+    #[Route('/oficio/nuevo', name: 'app_oficio_nuevo', methods: ['POST'])]
+    public function nuevo(Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('oficio/index.html.twig');
+        // Obtener el texto del formulario
+        $name = $request->request->get('nombreOficio');
+
+        if ($name) {
+            // Crear una nueva recomendación
+            $recomendacion = new Oficio();
+            $recomendacion->setName($name);
+            $recomendacion->setStatus(true);
+
+            // Guardar en la base de datos
+            $em->persist($recomendacion);
+            $em->flush();
+
+            // Añadir mensaje flash o redirigir a una página de éxito
+            $this->addFlash('success', 'Recomendación creada con éxito.');
+        }
+
+        // Redirigir o mostrar un mensaje
+        return $this->redirectToRoute('app_full_list');
     }
     #[Route('/oficio/{id}/toggle-status', name: 'oficio_toggle_status', methods: ['POST'])]
     public function toggleStatus($id, Request $request, EntityManagerInterface $em): JsonResponse

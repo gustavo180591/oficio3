@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FullListController extends AbstractController
 {
-    #[Route('/full/list', name: 'app_full_list')]
+    #[Route('/list', name: 'app_full_list')]
     public function index(
         OficioRepository $oficioRepository,
         RecomendacionRepository $recomendacionRepository,
