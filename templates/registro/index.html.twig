@@ -38,7 +38,7 @@
             </div>          
             <div class="mb-3">
                 {{ form_label(form.date, 'FECHA DE NACIMIENTO Ej: 01-01-2000', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'DD-MM-AAAA'}}) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control date-input', 'placeholder': 'DD-MM-AAAA'}}) }}
                 <div class="invalid-feedback">
                     {{ form_errors(form.date) }}
                 </div>
@@ -204,6 +204,20 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.date-input').on('input', function(e) {
+                let value = $(this).val().replace(/[^0-9]/g, ''); // Remueve todo lo que no sea número
+                if (value.length > 2 && value.length <= 4) {
+                    value = value.replace(/(\d{2})(\d+)/, '$1-$2');
+                } else if (value.length > 4) {
+                    value = value.replace(/(\d{2})(\d{2})(\d+)/, '$1-$2-$3');
+                }
+                $(this).val(value);
+            });
+        });
+    </script>
     <!-- Incluye jQuery y Bootstrap JS si no están ya incluidos -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>

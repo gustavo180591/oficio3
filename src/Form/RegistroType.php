@@ -25,12 +25,13 @@ class RegistroType extends AbstractType
                 'attr' => ['maxlength' => 250],
             ])
             ->add('date', DateType::class, [
-                'widget'=>'single_text',
-        'format' => 'dd-MM-yyyy',
-
-        // 2. Disable HTML5 option
-        'html5' => false
-                
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'form-control date-input', // clase específica para la máscara
+                    'placeholder' => 'DD-MM-YYYY',
+                ],
             ])
             ->add('phone')
             ->add('dni')
