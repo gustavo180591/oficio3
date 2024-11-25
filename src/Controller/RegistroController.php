@@ -16,22 +16,33 @@ class RegistroController extends AbstractController
 {
     #[Route('/registro', name: 'app_registro')]
     public function index(EntityManagerInterface $entityManager, Request $request): Response
-    {
-        $registro = new Registro();
-        // ...
-        $form = $this->createForm(RegistroType::class, $registro);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($registro);
-            $entityManager->flush();
-            $nombre=$registro->getName();
-            return $this->render('registro/success.html.twig', ['nombre' => $nombre]);
-        }
-        return $this->render('registro/index.html.twig', [
-            'controller_name' => 'RegistroController',
-            'form' => $form,
+{
+    $registro = new Registro();
+    // ...
+    $form = $this->createForm(RegistroType::class, $registro);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->persist($registro);
+        $entityManager->flush();
+
+        // Obtener los valores necesarios
+        $nombre = $registro->getName();
+        $email = $registro->getEmail();
+
+        // Redirigir al controlador app_send con los parámetros nombre y email
+        return $this->redirectToRoute('app_send', [
+            'nombre' => $nombre,
+            'email' => $email,
         ]);
     }
+
+    return $this->render('registro/index.html.twig', [
+        'controller_name' => 'RegistroController',
+        'form' => $form,
+    ]);
+}
+
     
     #[Route('/buscar', name: 'app_lista')]
     public function lista(EntityManagerInterface $entityManager, Request $request): Response

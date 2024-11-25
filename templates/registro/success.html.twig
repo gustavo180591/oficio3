@@ -27,10 +27,4 @@
 </div>
 <footer class="bg-orange-500 w-full py-4 mt-auto text-center text-white"></footer>
 
-<script>
-    // Redirigir automáticamente al controlador de envío de correo después de 3 segundos
-    setTimeout(function() {
-        window.location.href = "{{ path('app_send', {'nombre': nombre}) }}";
-    }, 3000); // 3 segundos de espera antes de redirigir
-</script>
 {% endblock %}

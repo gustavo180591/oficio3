@@ -8,33 +8,38 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class SendController extends AbstractController
 {
     #[Route('/send', name: 'app_send')]
-    public function index(MailerInterface $mailer, Request $request): Response
+    public function index(MailerInterface $mailer, Request $request, KernelInterface $kernel): Response
     {
-        // Obtener el nombre del parámetro de la solicitud
         $nombre = $request->query->get('nombre');
-
-        // Enviar el correo con el nombre personalizado
-        $this->sendEmail($mailer, $nombre);
+        $emailDestino = $request->query->get('email');
+               // Enviar el correo con el nombre personalizado
+        $this->sendEmail($mailer, $kernel, $nombre, $emailDestino);
 
         // Renderizar una vista de confirmación o redirigir
-        return $this->render('send/index.html.twig', [
-            'controller_name' => 'SendController',
-            'nombre' => $nombre,
-        ]);
+return $this->render('registro/success.html.twig', ['nombre' => $nombre]);
     }
 
-    private function sendEmail(MailerInterface $mailer, $nombre)
+    private function sendEmail(MailerInterface $mailer, KernelInterface $kernel, string $nombre, string $emailDestino)
     {
+        // Obtén la ruta física de la imagen
+        $imagePath = $kernel->getProjectDir() . '/public/images/logo.png';
+    
         $email = (new Email())
-            ->from('registrodeoficios.ar@gmail.com')
-            ->to('gustavo.faccendini@gmail.com') // Reemplazar por el destinatario real
+            ->from('registrodeoficios.ar@gmail.com') // Correo de origen
+            ->to($emailDestino) // Correo ingresado por el usuario
             ->subject('Registro Exitoso')
-            ->text("Hola $nombre,\n\nGracias por registrarte. Tu solicitud fue registrada con éxito y será verificada en las próximas 24 horas.");
-
+            ->html("
+                <p>Hola $nombre,</p>
+                <p>Gracias por registrarte. Tu solicitud fue registrada con éxito y será verificada en las próximas 24 horas. Que tenga un buen día.</p>
+                <p><img src=\"cid:logo\" alt=\"Logo\" /></p>
+            ")
+            ->embedFromPath($imagePath, 'logo'); // Incrusta la imagen con CID 
+    
         $mailer->send($email);
     }
 }
