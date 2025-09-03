@@ -24,7 +24,8 @@ class RegistroRepository extends ServiceEntityRepository
             ->join('r.delegacion', 'd')  // Hacemos un JOIN con la tabla delegacion
             ->andWhere('r.oficio = :oficio')
             ->andWhere('d.id IN (:delegaciones)')  // Filtramos usando los IDs de las delegaciones
-            ->setParameter('oficio', $oficio)
+            ->orderBy('r.name','ASC')
+		->setParameter('oficio', $oficio)
             ->setParameter('delegaciones', $delegaciones)
             ->getQuery()
             ->getResult();

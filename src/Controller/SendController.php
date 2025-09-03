@@ -18,8 +18,10 @@ class SendController extends AbstractController
         $nombre = $request->query->get('nombre');
         $emailDestino = $request->query->get('email');
                // Enviar el correo con el nombre personalizado
+	try{
         $this->sendEmail($mailer, $kernel, $nombre, $emailDestino);
-
+	}catch (\Exception $e) {
+	}
         // Renderizar una vista de confirmación o redirigir
 return $this->render('registro/success.html.twig', ['nombre' => $nombre]);
     }

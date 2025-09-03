@@ -130,7 +130,7 @@ LISTA DE REGISTROS
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size: 1.5rem;">{{ registro.name|upper }}</h5>
+                        <h5 class="card-title" style="font-size: 1.5rem;">{{ registro.name|upper }} ({{registro.oficio.name|upper}})</h5>
                         <p class="card-text" style="font-size: 1.25rem;">DESCRIPCIÓN: {{ registro.description|upper }}</p>
                         <p class="card-text" style="font-size: 1.25rem;">HORARIO DE ATENCIÓN: {{ registro.time|upper }}</p>
                         <p class="card-text" style="font-size: 1.25rem;">MÉTODOS DE PAGO: {{ registro.payment|upper }}</p>
@@ -159,6 +159,12 @@ LISTA DE REGISTROS
                                 <p><strong>NRO. DE REGISTRO:</strong> {{ registro.id }}</p>
                                 <p><strong>NOMBRE:</strong> {{ registro.name|upper }}</p>
                                 <p><strong>OFICIO:</strong> {{ registro.oficio.name|upper }}</p>
+{% if registro.workAddress %}
+    <p><strong>DOMICILIO LABORAL:</strong> {{ registro.workAddress|upper }}</p>
+{% else %}
+    <p><strong>DOMICILIO LABORAL:</strong> NO ESPECIFICADO</p>
+{% endif %}
+
                                 <p><strong>DESCRIPCIÓN:</strong> {{ registro.description|upper }}</p>
                                 <p><strong>TELÉFONO:</strong> {{ registro.phone|upper }}</p>
                                 <p><strong>EMAIL:</strong> {{ registro.email|upper }}</p>
@@ -173,6 +179,10 @@ LISTA DE REGISTROS
                                 {% if registro.images %}
                                     <p><strong>IMÁGENES:</strong> {% if registro.images %}<a href="{{ asset('images/products/' ~ registro.images) }}" target="_blank"><img src="{{ asset('images/products/' ~ registro.images) }}" width="100"></a>{% endif %}</p>
                                 {% endif %}
+<p><strong>DELEGACIONES DONDE PRESTA SERVICIO:</strong>
+				{% for delegacion in registro.delegacion %}
+    <li style="display: inline;">{{ delegacion.name }}{% if not loop.last %} - {% endif %} </li>
+{% endfor %}</p>
                             </div>
                             <div class="modal-footer">
                                 <div class="d-flex justify-content-between gap-2">

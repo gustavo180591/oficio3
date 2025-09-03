@@ -62,7 +62,9 @@ class RegistroController extends AbstractController
         $query = $entityManager->createQuery(
             'SELECT r 
              FROM App\Entity\Registro r
-             WHERE r.status = :status'
+JOIN r.oficio o 
+             WHERE r.status = :status
+ORDER BY o.name ASC, r.name ASC'
         )->setParameter('status', true);
 
         $lista = $query->getResult();
