@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RecomendacionRepository;
+use App\Entity\Registro;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +20,10 @@ class Recomendacion
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\ManyToOne(targetEntity: Registro::class, inversedBy: 'recomendaciones')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Registro $registro = null;
 
     public function getId(): ?int
     {

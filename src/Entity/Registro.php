@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Oficio;
+use App\Entity\Recomendacion;
 use App\Repository\RegistroRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,6 +14,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RegistroRepository::class)]
 #[Vich\Uploadable]
+#[HasLifecycleCallbacks]
 class Registro
 {
     #[ORM\Id]
@@ -75,12 +77,37 @@ class Registro
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'registro')]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, Recomendacion>
+     */
+    #[ORM\OneToMany(targetEntity: Recomendacion::class, mappedBy: 'registro')]
+    private Collection $recomendaciones;
+
     #[ORM\Column(type: 'boolean')]
     private ?bool $status = true; // Por defecto habilitado
+
+    #[ORM\Column(name: 'created_at', type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(name: 'updated_at', type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->recomendaciones = new ArrayCollection();
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void {
+        $now = new \DateTimeImmutable();
+        $this->createdAt ??= $now;
+        $this->updatedAt = $now;
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function setImageFile(?File $imageFile = null): void
@@ -315,6 +342,52 @@ class Registro
     public function getStatus(): ?bool
     {
         return $this->status;
+    }
+
+    /**
+     * @return Collection<int, Recomendacion>
+     */
+    public function getRecomendaciones(): Collection
+    {
+        return $this->recomendaciones;
+    }
+
+    public function addRecomendacion(Recomendacion $recomendacion): self
+    {
+        if (!$this->recomendaciones->contains($recomendacion)) {
+            $this->recomendaciones->add($recomendacion);
+            $recomendacion->setRegistro($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecomendacion(Recomendacion $recomendacion): self
+    {
+        if ($this->recomendaciones->removeElement($recomendacion)) {
+            // set the owning side to null (unless already changed)
+            if ($recomendacion->getRegistro() === $this) {
+                $recomendacion->setRegistro(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     public function setStatus(bool $status): self
